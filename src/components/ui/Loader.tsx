@@ -44,10 +44,11 @@ interface LandingProps {
 }
 
 /**
- * ✅ LandingPage (stable final)
- * - No nested <a> tags
- * - Fully valid JSX and Tailwind syntax
- * - Maintains animations and theming
+ * ✅ LandingPage
+ * - Fully localized & themable
+ * - Lazy loads Navbar and animations
+ * - Reusable with props for flexible reuse
+ * - Now uses reusable UI components
  */
 export default function LandingPage({
   title,
@@ -58,7 +59,7 @@ export default function LandingPage({
   const t = useTranslations("landing");
   const { theme } = useThemeStore();
 
-  // Fallback translations
+  // Fall back to translations if props not provided
   const pageTitle = title || t("title");
   const pageSubtitle = subtitle || t("subtitle");
   const pageCTA = ctaLabel || t("cta");
@@ -71,7 +72,7 @@ export default function LandingPage({
         color: "var(--foreground)",
       }}
     >
-      {/* ✅ Background gradient */}
+      {/* ✅ Gradient background based on theme */}
       <div
         className="absolute inset-0 pointer-events-none opacity-50 transition-colors duration-300"
         style={{
@@ -79,7 +80,7 @@ export default function LandingPage({
         }}
       />
 
-      {/* ✅ Navbar */}
+      {/* ✅ Navbar (lazy-loaded) */}
       <Suspense fallback={<Loader text="Loading Navbar..." />}>
         <Navbar alwaysLoginButton />
       </Suspense>
@@ -100,16 +101,17 @@ export default function LandingPage({
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, duration: 0.6 }}
           >
-            {/* ✅ Single link (no nested <a> or <Button>) */}
-            <Link
-              href={ctaHref}
-              className="inline-block rounded-md text-lg font-medium px-6 py-3 transition-transform duration-200 hover:scale-105 hover:shadow-lg"
-              style={{
-                backgroundColor: "var(--primary)",
-                color: "#ffffff",
-              }}
-            >
-              {pageCTA}
+            <Link href={ctaHref}>
+              <Button
+                variant="primary"
+                className="inline-block rounded-md text-lg font-medium px-6 py-3 transition-transform duration-200 hover:scale-105 hover:shadow-lg"
+                style={{
+                  backgroundColor: "var(--primary)",
+                  color: "#ffffff",
+                }}
+              >
+                {pageCTA}
+              </Button>
             </Link>
           </motion.div>
         </Card>
