@@ -42,7 +42,7 @@ export default function ArticleForm({ articleId }: ArticleFormProps) {
           size: 0,
           type: "image/*",
           uploadedAt: new Date().toISOString(),
-          url: existingArticle.cover, // ✅ will persist now (base64)
+          url: existingArticle.cover,
         }
       : null
   );
@@ -75,7 +75,6 @@ export default function ArticleForm({ articleId }: ArticleFormProps) {
     }
   }, [existingArticle]);
 
-  // ✅ Persistent local cover upload (Base64)
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -88,14 +87,13 @@ export default function ArticleForm({ articleId }: ArticleFormProps) {
         size: file.size,
         type: file.type,
         uploadedAt: new Date().toISOString(),
-        url: reader.result as string, // ✅ base64 string persists in localStorage
+        url: reader.result as string,
       };
       setCover(fileData);
     };
-    reader.readAsDataURL(file); // ✅ convert file to base64
+    reader.readAsDataURL(file);
   };
 
-  // ✅ Add tag when pressing space, comma, or enter
   const handleTagKey = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === " " || e.key === "," || e.key === "Enter") {
       e.preventDefault();
@@ -125,7 +123,7 @@ export default function ArticleForm({ articleId }: ArticleFormProps) {
       title,
       category,
       tags,
-      cover: cover?.url || "", // ✅ now persistent base64
+      cover: cover?.url || "",
       content,
       published,
       date: date?.toISOString() || new Date().toISOString(),
@@ -142,7 +140,6 @@ export default function ArticleForm({ articleId }: ArticleFormProps) {
     router.push("/dashboard/articles");
   };
 
-  // 🎨 Generate consistent unique background color for each tag
   const getTagColor = (tag: string) => {
     let hash = 0;
     for (let i = 0; i < tag.length; i++) {
@@ -178,7 +175,7 @@ export default function ArticleForm({ articleId }: ArticleFormProps) {
         </select>
       </div>
 
-      {/* ✅ Tags */}
+      {/* Tags */}
       <div>
         <label className="block mb-1 font-medium">{t("tags_label")}</label>
         <div className="flex flex-wrap gap-2 mb-2">
@@ -211,15 +208,19 @@ export default function ArticleForm({ articleId }: ArticleFormProps) {
         />
       </div>
 
-      {/* ✅ Cover upload with persistent base64 */}
+      {/* Cover upload */}
       <div>
         <label className="block mb-1 font-medium">{t("cover_label")}</label>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleFileUpload}
-          className="w-full border border-[var(--borderColor)] rounded-md p-2 bg-[var(--background)] text-[var(--foreground)]"
-        />
+        <label className="cursor-pointer bg-blue-600 text-white text-sm px-3 py-1 rounded-md hover:bg-blue-700 transition inline-block">
+          {t("choosearticlefile")}
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleFileUpload}
+            className="hidden"
+          />
+        </label>
+
         {cover && (
           <div className="mt-2">
             <img
@@ -231,7 +232,7 @@ export default function ArticleForm({ articleId }: ArticleFormProps) {
         )}
       </div>
 
-      {/* ✅ Content */}
+      {/*  Content */}
       <div>
         <label className="block mb-1 font-medium">{t("content_label")}</label>
         <div className="border border-[var(--borderColor)] rounded-md p-2 bg-[var(--background)]">
@@ -244,7 +245,7 @@ export default function ArticleForm({ articleId }: ArticleFormProps) {
         </div>
       </div>
 
-      {/* ✅ Publish + Date */}
+      {/*  Publish + Date */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <label className="flex items-center gap-2">

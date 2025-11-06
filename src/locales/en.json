@@ -107,7 +107,8 @@
     "save_button": "Save Preferences",
     "save_profile_success": "Profile details saved successfully!",
     "save_preferences_success": "Preferences saved successfully!",
-    "save_error": "Failed to save data."
+    "save_error": "Failed to save data.",
+    "choosefile": "choose image"
   },
   "table": {
     "title": "Data Table",
@@ -149,7 +150,8 @@
     "share": "Share Article",
     "share_not_supported": "Sharing not supported in this browser.",
     "link_copied": "Link copied to clipboard!",
-    "no_tags": "No tags available."
+    "no_tags": "No tags available.",
+    "choosearticlefile": "choose cover "
   },
   "hours": {
     "title": "Working Hours",

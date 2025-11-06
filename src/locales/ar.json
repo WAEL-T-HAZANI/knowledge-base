@@ -107,7 +107,8 @@
     "save_button": "حفظ التفضيلات",
     "save_profile_success": "تم حفظ تفاصيل الملف الشخصي بنجاح!",
     "save_preferences_success": "تم حفظ التفضيلات بنجاح!",
-    "save_error": "حدث خطأ أثناء الحفظ."
+    "save_error": "حدث خطأ أثناء الحفظ.",
+    "choosefile": "اختيار صورة"
   },
   "table": {
     "title": "جدول البيانات",
@@ -149,7 +150,8 @@
     "share": "مشاركة المقال",
     "share_not_supported": "المشاركة غير مدعومة في هذا المتصفح.",
     "link_copied": "تم نسخ الرابط إلى الحافظة!",
-    "no_tags": "لا توجد وسوم."
+    "no_tags": "لا توجد وسوم.",
+    "choosearticlefile": "اختيار خلفية"
   },
   "hours": {
     "title": "ساعات العمل",

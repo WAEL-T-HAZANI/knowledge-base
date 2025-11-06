@@ -91,7 +91,6 @@ export const useWorkingHoursStore = create<WorkingHoursState>()(
         get().checkConflicts();
       },
 
-      // ✅ FIXED copyRange — applies to all other days instead of same day
       copyRange(day, rangeId) {
         const { week } = get();
         const sourceDay = week.find((d) => d.day === day);

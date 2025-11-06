@@ -10,12 +10,6 @@ interface SidebarState {
   collapseSidebar: () => void;
 }
 
-/**
- * Sidebar Zustand Store
- * - Persists state in localStorage
- * - Safe for Next.js hydration
- * - Starts collapsed by default (e.g., after login)
- */
 export const useSidebarStore = create<SidebarState>()(
   persist(
     (set, get) => ({

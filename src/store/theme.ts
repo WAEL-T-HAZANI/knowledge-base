@@ -34,17 +34,16 @@ const themes: Record<ThemeMode, ThemeColors> = {
     borderColor: "#d1d5db",
   },
   dark: {
-    background: "#111827", // softer dark surface
-    foreground: "#f9fafb", // bright readable text
-    primary: "#60a5fa", // lighter blue
-    secondary: "#cbd5e1", // light gray text
-    inputBg: "#1e293b", // form background
+    background: "#111827",
+    foreground: "#f9fafb",
+    primary: "#60a5fa",
+    secondary: "#cbd5e1",
+    inputBg: "#1e293b",
     inputText: "#f8fafc",
-    borderColor: "#475569", // mid gray border
+    borderColor: "#475569",
   },
 };
 
-/* Apply CSS variables dynamically */
 function applyTheme(mode: ThemeMode) {
   const root = document.documentElement;
   const palette = themes[mode];

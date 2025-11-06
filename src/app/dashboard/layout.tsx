@@ -10,12 +10,12 @@ import { useDashboardStore } from "@/src/store/dashboard";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 
-// ✅ Lazy-load Sidebar for better performance
+//  Lazy-load Sidebar
 const Sidebar = dynamic(() => import("@/src/components/sidebar"), {
   ssr: false,
 });
 
-// ✅ Lazy-load GuidedTour (Joyride) as client-only
+// ✅ Lazy-load GuidedTour
 const GuidedTour = dynamic(() => import("@/src/components/ui/GuidedTour"), {
   ssr: false,
 });
@@ -31,7 +31,6 @@ export default function DashboardLayout({
   const pathname = usePathname();
   const t = useTranslations("dashboard");
 
-  // ✅ Detect both tab & subtab dynamically
   useEffect(() => {
     const match = pathname.match(/\/dashboard\/([^/]+)(?:\/([^/]+))?/);
     const tab = match?.[1] || "dashboard";
@@ -39,7 +38,6 @@ export default function DashboardLayout({
     if (tab !== activeTab || sub !== subTab) setActiveTab(tab, sub);
   }, [pathname, activeTab, subTab, setActiveTab]);
 
-  // ✅ Dynamic title/subtitle resolution
   let titleKey = "title";
   let subtitleKey = "subtitle";
 
@@ -53,7 +51,6 @@ export default function DashboardLayout({
     }
   }
 
-  // ✅ Safe fallback to main dashboard title/subtitle
   let title = t.has?.(titleKey) ? t(titleKey) : t("title");
   let subtitle = t.has?.(subtitleKey) ? t(subtitleKey) : t("subtitle");
 
@@ -87,7 +84,7 @@ export default function DashboardLayout({
           subtitle={subtitle}
           rightSlot={
             <div className="flex items-center gap-3">
-              {/* ✅ Theme Toggle */}
+              {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
                 className="theme-toggle px-3 py-1 border rounded-md transition-all"
@@ -100,7 +97,7 @@ export default function DashboardLayout({
                 {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
               </button>
 
-              {/* ✅ Language Toggle */}
+              {/* Language Toggle */}
               <button
                 onClick={toggleLocale}
                 className="language-toggle px-3 py-1 border rounded-md transition-all"
@@ -124,7 +121,7 @@ export default function DashboardLayout({
         <div className="flex-1">{children}</div>
       </main>
 
-      {/* ✅ Client-only Guided Tour */}
+      {/*  Client-only Guided Tour */}
       <GuidedTour />
     </div>
   );

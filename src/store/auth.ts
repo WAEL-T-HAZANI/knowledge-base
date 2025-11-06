@@ -64,7 +64,7 @@ export const useAuthStore = create<AuthState>()(
       isAuthenticated: false,
       lastLogin: null,
 
-      // ✅ LOGIN
+      //  LOGIN
       async login(email, password) {
         const { users } = get();
         const foundUser = users.find(
@@ -83,13 +83,13 @@ export const useAuthStore = create<AuthState>()(
         return true;
       },
 
-      // ✅ LOGOUT
+      //  LOGOUT
       logout() {
         set({ user: null, isAuthenticated: false, lastLogin: null });
         localStorage.removeItem("lastLogin");
       },
 
-      // ✅ UPDATE PROFILE (Localized messages)
+      //  UPDATE PROFILE
       updateProfile(data) {
         const { user, users } = get();
         if (!user)
@@ -119,7 +119,7 @@ export const useAuthStore = create<AuthState>()(
         );
         if (duplicate) return { success: false, message: "auth.email_exists" };
 
-        // ✅ Update user
+        //  Update user
         const updatedUser = {
           ...user,
           email: newEmail,
@@ -155,7 +155,7 @@ export const useAuthStore = create<AuthState>()(
         };
       },
 
-      // ✅ SESSION CHECK
+      //  SESSION CHECK
       checkSession() {
         const { lastLogin } = get();
         if (!lastLogin) return;

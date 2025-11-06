@@ -2,7 +2,6 @@
 
 /**
  * Loads translation messages dynamically from /src/locales.
- * This file runs on the server — no JSX or "use client" here.
  */
 export async function getMessages(locale: string) {
   try {

@@ -17,7 +17,6 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [{ protocol: "https", hostname: "**" }],
   },
-  // ✅ explicitly opt in to Turbopack
   experimental: {},
   turbopack: {}, // 👈 this silences the warning
 };

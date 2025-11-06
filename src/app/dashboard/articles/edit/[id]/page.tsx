@@ -9,7 +9,7 @@ import { useDashboardStore } from "@/src/store/dashboard";
 import { useLocaleStore } from "@/src/store/locale";
 import Button from "@/src/components/ui/Button";
 
-// ✅ Lazy load ArticleForm safely (no loader crash)
+//  Lazy load ArticleForm safely
 const ArticleForm = dynamic(
   () => import("@/src/components/articles/ArticleForm"),
   {
@@ -30,7 +30,7 @@ export default function EditArticlePage() {
     setActiveTab("articles", "edit");
   }, [setActiveTab]);
 
-  if (!mounted) return null; // prevents hydration mismatch on refresh
+  if (!mounted) return null;
 
   return (
     <div className="p-8 space-y-6">

@@ -58,7 +58,7 @@ export default function LoginPage() {
     }
   }, [mounted, isAuthenticated, router]);
 
-  if (!mounted) return null; // ✅ prevents login flash before redirect
+  if (!mounted) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,7 +67,7 @@ export default function LoginPage() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{10,}$/;
 
-    // ✅ Validate both fields independently
+    // Validate both fields independently
     if (!email.trim() || !emailRegex.test(email)) {
       newErrors.email = t("invalid_email");
     }
@@ -111,7 +111,7 @@ export default function LoginPage() {
           borderColor: "var(--border-color)",
         }}
       >
-        {/* ✅ Header */}
+        {/*  Header */}
         <SectionHeader
           title={t("title")}
           rightSlot={
@@ -133,7 +133,7 @@ export default function LoginPage() {
           }
         />
 
-        {/* ✅ Email */}
+        {/*  Email */}
         <div>
           <input
             type="email"
@@ -149,7 +149,6 @@ export default function LoginPage() {
             }}
             autoComplete="off"
           />
-          {/* Reserve space for error to avoid shifting */}
           <div className="h-5 mt-1">
             {errors.email && (
               <p className="text-red-600 text-sm">{errors.email}</p>
@@ -157,7 +156,7 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* ✅ Password (eye icon alignment fixed) */}
+        {/*  Password  */}
         <div className="relative w-full mb-1">
           <div className="relative">
             <input
@@ -190,7 +189,6 @@ export default function LoginPage() {
             </button>
           </div>
 
-          {/* Reserve space for error so layout is stable */}
           <div className="h-5 mt-1">
             {errors.password && (
               <p className="text-red-600 text-sm text-start" dir={dir}>
@@ -200,7 +198,7 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* ✅ Submit */}
+        {/* Submit */}
         <Button
           type="submit"
           disabled={submitting}
@@ -216,7 +214,7 @@ export default function LoginPage() {
           {submitting ? t("loading") : t("submit")}
         </Button>
 
-        {/* ✅ Toggles */}
+        {/*  Toggles */}
         <div className="flex justify-between mt-4">
           <Button
             type="button"

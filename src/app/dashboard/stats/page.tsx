@@ -11,7 +11,7 @@ import { useLocaleStore } from "@/src/store/locale";
 import { useArticleStore } from "@/src/store/articles";
 import { useAuthStore } from "@/src/store/auth";
 
-// ✅ Lazy load charts to optimize dashboard performance
+//  Lazy load charts
 const DonutChart = dynamic(
   () => import("@/src/components/charts/ArticlesDonut"),
   {
@@ -22,7 +22,7 @@ const AreaChart = dynamic(() => import("@/src/components/charts/ViewsArea"), {
   ssr: false,
 });
 
-// ✅ Local Zustand store for date range
+// Local Zustand store for date range
 interface StatsState {
   startDate: Date;
   endDate: Date;
@@ -37,7 +37,7 @@ const useStatsStore = create<StatsState>((set) => ({
   setEndDate: (date) => set({ endDate: date }),
 }));
 
-// ✅ Translations
+//  Translations
 import en from "@/src/locales/en.json";
 import ar from "@/src/locales/ar.json";
 
@@ -50,7 +50,7 @@ export default function StatsPage() {
 
   const t = locale === "ar" ? ar : en;
 
-  // ✅ Filter articles by date range
+  // Filter articles by date range
   const filteredArticles = useMemo(() => {
     return articles.filter((a) => {
       const articleDate = new Date(a.date);
@@ -58,7 +58,7 @@ export default function StatsPage() {
     });
   }, [articles, startDate, endDate]);
 
-  // 🧠 Articles per Category (using filtered ones)
+  //  Articles per Category (using filtered ones)
   const articlesByCategory = useMemo(() => {
     const counts: Record<string, number> = {};
     filteredArticles.forEach((a) => {
@@ -71,7 +71,7 @@ export default function StatsPage() {
     };
   }, [filteredArticles]);
 
-  // 👥 Mock Views per Day (same as before)
+  //  Mock Views per Day (same as before)
   const mockViews = useMemo(() => {
     const days =
       Math.ceil(
@@ -99,7 +99,7 @@ export default function StatsPage() {
       dir={dir}
       className="min-h-screen p-6 space-y-8 bg-[var(--background)] text-[var(--foreground)] transition-colors"
     >
-      {/* 📅 Date Range Filter */}
+      {/* Date Range Filter */}
       <div
         className={`flex flex-wrap gap-4 items-end ${
           dir === "rtl" ? "justify-end" : ""
@@ -133,7 +133,7 @@ export default function StatsPage() {
         </div>
       </div>
 
-      {/* 📊 Charts Section */}
+      {/*  Charts Section */}
       <div className="grid md:grid-cols-2 gap-6">
         {/* 🥧 Articles per Category */}
         {filteredArticles.length === 0 ? (
@@ -157,7 +157,7 @@ export default function StatsPage() {
           />
         )}
 
-        {/* 📈 Mock Views per Day */}
+        {/*  Mock Views per Day */}
         {users.length === 0 ? (
           <div className="p-4 rounded-2xl shadow border border-[var(--borderColor)] text-center text-sm text-[var(--secondary)]">
             {t.stats.no_users}

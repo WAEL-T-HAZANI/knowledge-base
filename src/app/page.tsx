@@ -44,10 +44,7 @@ interface LandingProps {
 }
 
 /**
- * ✅ LandingPage (stable final)
- * - No nested <a> tags
- * - Fully valid JSX and Tailwind syntax
- * - Maintains animations and theming
+ *  LandingPage
  */
 export default function LandingPage({
   title,
@@ -71,7 +68,7 @@ export default function LandingPage({
         color: "var(--foreground)",
       }}
     >
-      {/* ✅ Background gradient */}
+      {/* Background gradient */}
       <div
         className="absolute inset-0 pointer-events-none opacity-50 transition-colors duration-300"
         style={{
@@ -79,12 +76,12 @@ export default function LandingPage({
         }}
       />
 
-      {/* ✅ Navbar */}
+      {/*  Navbar */}
       <Suspense fallback={<Loader text="Loading Navbar..." />}>
         <Navbar alwaysLoginButton />
       </Suspense>
 
-      {/* ✅ Hero Section */}
+      {/*  Hero Section */}
       <main className="flex flex-col items-center justify-center flex-1 text-center px-6 relative z-10">
         <Card className="bg-transparent border-none shadow-none p-0">
           <motion.div
@@ -100,7 +97,6 @@ export default function LandingPage({
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, duration: 0.6 }}
           >
-            {/* ✅ Single link (no nested <a> or <Button>) */}
             <Link
               href={ctaHref}
               className="inline-block rounded-md text-lg font-medium px-6 py-3 transition-transform duration-200 hover:scale-105 hover:shadow-lg"

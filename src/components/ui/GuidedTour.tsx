@@ -1,7 +1,5 @@
 "use client";
 
-// ✅ must be FIRST import so patch runs before Joyride loads
-
 import { useEffect, useState } from "react";
 import Joyride, { Step, CallBackProps, STATUS, ACTIONS } from "react-joyride";
 import { usePathname } from "next/navigation";
@@ -90,18 +88,7 @@ export default function GuidedTour() {
         content: (
           <div>
             <h3 className="font-semibold mb-2">{cfg.title}</h3>
-            <p className="mb-4">{cfg.desc}</p>
-            <div className="flex justify-end">
-              <button
-                onClick={() => {
-                  sessionStorage.setItem(key, "true");
-                  setRun(false);
-                }}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded text-sm transition-all"
-              >
-                Close
-              </button>
-            </div>
+            <p>{cfg.desc}</p>
           </div>
         ),
         disableBeacon: true,
@@ -126,32 +113,56 @@ export default function GuidedTour() {
       [STATUS.FINISHED, STATUS.SKIPPED].includes(status) ||
       action === ACTIONS.CLOSE
     ) {
+      sessionStorage.setItem(getTourKey(), "true");
       setRun(false);
     }
   };
 
   return (
-    <Joyride
-      steps={steps}
-      run={run}
-      continuous={false}
-      showSkipButton={false}
-      showProgress={false}
-      disableOverlayClose
-      disableScrollParentFix
-      spotlightPadding={10}
-      callback={handleCallback}
-      locale={{ close: "" }} // hide built-in close
-      styles={{
-        options: {
-          zIndex: 9999,
-          primaryColor: "#2563eb",
-          backgroundColor: "#ffffff",
-          textColor: "#111827",
-        },
-        tooltip: { textAlign: "left", maxWidth: "380px" },
-        buttonClose: { display: "none" },
-      }}
-    />
+    <>
+      <style jsx global>{`
+        /* Make Joyride's built-in "X" close button clean (no blue background) */
+        .react-joyride__tooltip button[data-test-id="button-close"] {
+          background: transparent !important;
+          color: #111827 !important; /* neutral dark text */
+          border: none !important;
+          box-shadow: none !important;
+          width: 28px !important;
+          height: 28px !important;
+          font-size: 18px !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          border-radius: 9999px !important;
+          cursor: pointer !important;
+          transition: background-color 0.2s ease !important;
+        }
+        .react-joyride__tooltip button[data-test-id="button-close"]:hover {
+          background-color: rgba(0, 0, 0, 0.05) !important;
+        }
+      `}</style>
+
+      <Joyride
+        steps={steps}
+        run={run}
+        continuous={false}
+        showSkipButton={false}
+        showProgress={false}
+        disableOverlayClose
+        disableScrollParentFix
+        spotlightPadding={10}
+        callback={handleCallback}
+        locale={{ close: "×" }}
+        styles={{
+          options: {
+            zIndex: 9999,
+            primaryColor: "#2563eb",
+            backgroundColor: "#ffffff",
+            textColor: "#111827",
+          },
+          tooltip: { textAlign: "left", maxWidth: "380px" },
+        }}
+      />
+    </>
   );
 }

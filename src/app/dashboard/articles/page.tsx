@@ -46,7 +46,7 @@ export default function ArticlesPage() {
     reorderArticles(arrayMove(articles, oldIndex, newIndex));
   };
 
-  // ✅ Export Single Article to PDF
+  //  Export Single Article to PDF
   const exportPDF = (article: any) => {
     const doc = new jsPDF();
     doc.text(article.title, 10, 10);
@@ -69,7 +69,7 @@ export default function ArticlesPage() {
     doc.save(`${article.title}.pdf`);
   };
 
-  // ✅ Export All Articles to Excel
+  //  Export All Articles to Excel
   const exportExcel = () => {
     if (articles.length === 0) return;
 
@@ -95,7 +95,7 @@ export default function ArticlesPage() {
     saveAs(blob, "articles.xlsx");
   };
 
-  // ✅ Share Article
+  //  Share Article
   const shareArticle = async (article: any) => {
     const shareData = {
       title: article.title,
@@ -128,7 +128,7 @@ export default function ArticlesPage() {
         <h2 className="text-2xl font-semibold">{t("list_title")}</h2>
 
         <div className="flex items-center gap-3">
-          {/* ✅ Excel Export */}
+          {/*  Excel Export */}
           <button
             onClick={exportExcel}
             className="flex items-center gap-2 px-4 py-2 rounded-md border border-green-500 text-green-600 hover:bg-green-600 hover:text-white transition"
@@ -137,7 +137,7 @@ export default function ArticlesPage() {
             {t("export_excel") || "Export Excel"}
           </button>
 
-          {/* ➕ Add Article */}
+          {/*  Add Article */}
           <button
             onClick={handleAdd}
             className="flex items-center gap-2 px-4 py-2 rounded-md border border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition"
@@ -196,7 +196,7 @@ export default function ArticlesPage() {
               <X size={22} />
             </button>
 
-            {/* ✅ Show cover only if article has a valid image */}
+            {/* Show cover  */}
             {selectedArticle.cover && selectedArticle.cover.trim() !== "" && (
               <img
                 src={selectedArticle.cover}

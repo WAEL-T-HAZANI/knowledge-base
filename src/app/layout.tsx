@@ -9,7 +9,7 @@ import { Toaster } from "sonner";
 import LayoutClientWrapper from "@/src/components/LayoutClientWrapper";
 
 /* ---------------------------------------------
-   ✅ PWA + SEO Metadata
+
 ---------------------------------------------- */
 export const metadata: Metadata = {
   title: "Knowledge Base Dashboard",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 };
 
 /* ---------------------------------------------
-   ✅ RootLayout
+    RootLayout
 ---------------------------------------------- */
 export default async function RootLayout({ children, params }: LayoutProps) {
   const resolvedParams = await params;

@@ -63,7 +63,6 @@ export default function SettingsPage() {
     toast.success(ta("profile_picture_removed"), { position: toastPosition });
   };
 
-  // ✅ Auto-save when theme or language changes
   const handleThemeChange = (theme: "light" | "dark") => {
     try {
       setDefaultTheme(theme);
@@ -104,7 +103,7 @@ export default function SettingsPage() {
               </label>
               <div className="flex items-center gap-3">
                 <label className="cursor-pointer bg-blue-600 text-white text-sm px-3 py-1 rounded-md hover:bg-blue-700 transition">
-                  Choose File
+                  {ts("choosefile", { default: "اختيار صورة" })}
                   <input
                     ref={fileInputRef}
                     type="file"
@@ -119,7 +118,7 @@ export default function SettingsPage() {
                     onClick={handleRemoveAvatar}
                     className="bg-red-600 text-white text-sm px-3 py-1 rounded-md hover:bg-red-700 transition"
                   >
-                    Remove
+                    {dir === "rtl" ? "إزالة" : "Remove"}
                   </button>
                 )}
               </div>
@@ -180,6 +179,7 @@ export default function SettingsPage() {
           </h3>
 
           <div className="flex-1 space-y-6">
+            {/* Theme */}
             <div>
               <label className="block mb-2 font-medium">
                 {ts("theme_label")}
@@ -196,6 +196,7 @@ export default function SettingsPage() {
               </select>
             </div>
 
+            {/* Language */}
             <div>
               <label className="block mb-2 font-medium">
                 {ts("lang_label")}
@@ -213,7 +214,7 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          {/* ✅ Save button kept for design balance, optional now */}
+          {/* Save button kept for layout balance */}
           <button
             disabled
             className="mt-6 bg-green-600/50 text-white px-4 py-2 rounded-md cursor-not-allowed"
