@@ -168,3 +168,61 @@ html[data-theme="dark"] .driver-popover {
 .__floater__footer button.bg-red-500 {
   order: 0; /* ensure it appears before Close */
 }
+/* Force Joyride built-in close button to top-right position */
+.react-joyride__tooltip button[data-test-id="button-close"] {
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  background: transparent !important;
+  color: var(--foreground, #111827) !important;
+  border: none !important;
+  font-size: 18px !important;
+  width: 28px !important;
+  height: 28px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 9999px !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease !important;
+  z-index: 10000 !important;
+}
+
+/* Add hover effect */
+.react-joyride__tooltip button[data-test-id="button-close"]:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Dark mode awareness */
+html[data-theme="dark"]
+  .react-joyride__tooltip
+  button[data-test-id="button-close"] {
+  color: #f9fafb !important;
+}
+
+html[data-theme="dark"]
+  .react-joyride__tooltip
+  button[data-test-id="button-close"]:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+/* === Sidebar Full Height Fix === */
+.sidebar {
+  min-height: 100vh !important;
+  height: 100% !important;
+  display: flex;
+  flex-direction: column;
+}
+/* === Fix DashboardHome height gap === */
+.dashboard-main {
+  min-height: 100vh !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-main > div:last-child {
+  flex: 1 !important; /* Ensures page content fills vertical space */
+}
+
+.dashboard-main .min-h-screen {
+  min-height: 100% !important; /* Fix for DashboardHome welcome page */
+}

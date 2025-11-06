@@ -16,7 +16,6 @@ export const metadata: Metadata = {
   description:
     "Bilingual Dashboard built with Next.js, Tailwind CSS, Zustand, and next-intl",
   manifest: "/manifest.json",
-  themeColor: "#2563eb",
   icons: {
     icon: "/icons/icon-192x192.png",
     apple: "/icons/icon-192x192.png",
@@ -28,6 +27,10 @@ export const metadata: Metadata = {
   },
   applicationName: "Knowledge Base Dashboard",
   formatDetection: { telephone: false },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#2563eb",
 };
 
 /* ---------------------------------------------

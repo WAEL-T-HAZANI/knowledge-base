@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import Joyride, { Step, CallBackProps, STATUS, ACTIONS } from "react-joyride";
 import { usePathname } from "next/navigation";
+import { useThemeStore } from "@/src/store/theme";
 
-/** Wait until one of the given selectors exists */
 async function waitForElement(
   selectors: string[],
   timeout = 8000
@@ -23,6 +23,7 @@ export default function GuidedTour() {
   const pathname = usePathname();
   const [run, setRun] = useState(false);
   const [steps, setSteps] = useState<Step[]>([]);
+  const { theme } = useThemeStore();
 
   const getTourKey = () => `tour_${pathname}`;
 
@@ -118,18 +119,23 @@ export default function GuidedTour() {
     }
   };
 
+  const darkMode = theme === "dark";
+
   return (
     <>
       <style jsx global>{`
-        /* Make Joyride's built-in "X" close button clean (no blue background) */
+        /* Make the X clean, top-right, theme-aware */
         .react-joyride__tooltip button[data-test-id="button-close"] {
           background: transparent !important;
-          color: #111827 !important; /* neutral dark text */
+          color: ${darkMode ? "#f9fafb" : "#111827"} !important;
           border: none !important;
           box-shadow: none !important;
+          position: absolute !important;
+          top: 8px !important;
+          right: 8px !important;
+          font-size: 18px !important;
           width: 28px !important;
           height: 28px !important;
-          font-size: 18px !important;
           display: flex !important;
           align-items: center !important;
           justify-content: center !important;
@@ -138,7 +144,9 @@ export default function GuidedTour() {
           transition: background-color 0.2s ease !important;
         }
         .react-joyride__tooltip button[data-test-id="button-close"]:hover {
-          background-color: rgba(0, 0, 0, 0.05) !important;
+          background-color: ${darkMode
+            ? "rgba(255, 255, 255, 0.1)"
+            : "rgba(0, 0, 0, 0.05)"} !important;
         }
       `}</style>
 
@@ -157,10 +165,14 @@ export default function GuidedTour() {
           options: {
             zIndex: 9999,
             primaryColor: "#2563eb",
-            backgroundColor: "#ffffff",
-            textColor: "#111827",
+            backgroundColor: darkMode ? "#1e293b" : "#ffffff",
+            textColor: darkMode ? "#f1f5f9" : "#111827",
           },
-          tooltip: { textAlign: "left", maxWidth: "380px" },
+          tooltip: {
+            textAlign: "left",
+            maxWidth: "380px",
+            position: "relative",
+          },
         }}
       />
     </>
